@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <title>Quiz Game</title>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.sound.js"></script>
+    
+    <script type="text/javascript" src="Api.js"></script>
+    <script type="text/javascript" src="GameManager.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="Style.css">
+
+    <style>
+        body {
+            padding: 0; margin: 0;
+        }
+        canvas {
+            padding: 0;
+            margin: auto;
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+      </style>
+</head>
+
+<body>
+    <div id = "welcome">
+        <p class = "welcome-msg basicText">Velkommen til Quizzen</p>
+        <button class = "startBtn button" id = "startBtn" onclick="generateToken()">Start</button>
+    </div>
+
+    <div id = "question">
+        <p class = "question basicText" id = "questionText">Empty question</p>
+    </div>
+
+    <div id = "answers">
+        <button class = "answerBtn1 button answerBtn" id = "answerBtn1" onclick="Answer(1)">Empty answer</button>
+        <button class = "answerBtn2 button answerBtn" id = "answerBtn2" onclick="Answer(2)">Empty answer</button>
+        <button class = "answerBtn3 button answerBtn" id = "answerBtn3" onclick="Answer(3)">Empty answer</button>
+        <button class = "answerBtn4 button answerBtn" id = "answerBtn4" onclick="Answer(4)">Empty answer</button>
+    </div>
+
+    <div id = "end">
+        <p class = "gameOver">Finish!</p>
+        <button class = "tryAgainBtn button" id = "tryAgain" onclick="TryAgain()">Press here to play again</button>
+        <p class = "score basicText" id = "score">Empty score</p>
+    </div>
+
+</body>
+
+</html>
+
