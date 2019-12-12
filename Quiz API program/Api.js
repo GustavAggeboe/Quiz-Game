@@ -1,23 +1,28 @@
 var token;
 
-//Laver en token som sørger for at man ikke kan få det samme spørgsmål to gange i et spil
+// Laver en token som sørger for at man ikke kan få det samme spørgsmål to gange i et spil
 function generateToken() {
-    loadJSON("https://opentdb.com/api_token.php?command=request", getToken);
+    if (token == null) {
+        print("Generating token");
+        loadJSON("https://opentdb.com/api_token.php?command=request", generateQuestions);
+    }
 }
 
-//Her hentes denne token sammen med antallet af spørgsmål
-function getToken(data) {
+// Vi henter spørgsål med denne token
+function generateQuestions(data) {
+    print("Token generated! The token is: " + data.token);
     token = data.token;
-    loadJSON("https://opentdb.com/api.php?amount=" + amountOfQuestions + "&encode=url3986&token=" + token, getQuestions);
+    print("Generating questions");
+    loadJSON("https://opentdb.com/api.php?amount=" + amountOfQuestions + "&encode=url3986&token=" + token, loadQuestions);
 }
 
-//Henter spørgsmålene og starter spillet
-function getQuestions(data) {
+// Sætter questions arrayet til de genererede spørgmsmål og starter spillet (i GameManager.js)
+function loadQuestions(data) {
     questions = data.results;
     BeginGame();
 }
 
-//Resetter tokens efter spillet er ovre
+// Nulstiller token
 function resetToken() {
     loadJSON("https://opentdb.com/api_token.php?command=reset&token=" + token);
 }

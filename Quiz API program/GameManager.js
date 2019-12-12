@@ -1,7 +1,7 @@
 var w = 1240;
 var h = 720;
 var state = "start";
-var round;
+var gameRound;
 var correctAnswers = 0;
 var questions;
 var amountOfQuestions = 10;
@@ -14,6 +14,8 @@ function setup() {
 
 function BeginGame() {
     state = "game";
+    // Gør pæren blå
+    setHue(43690);
 }
 
 function draw() {
@@ -42,7 +44,7 @@ function StartLoop() {
     document.getElementById('answers').hidden = true;
     document.getElementById('question').hidden = true;
 
-    round = 1;
+    gameRound = 1;
 }
 
 var orderDecited = false;
@@ -58,7 +60,7 @@ function GameLoop() {
     document.getElementById('question').hidden = false;
 
     // Question
-    document.getElementById("questionText").innerHTML = unescape(questions[round - 1].question);
+    document.getElementById("questionText").innerHTML = unescape(questions[gameRound - 1].question);
 
     // Options
     document.getElementById('answers').hidden = false;
@@ -69,7 +71,7 @@ function GameLoop() {
 
     textAlign(LEFT);
     if (!orderDecited) {
-        if (questions[round - 1].type == "multiple") {
+        if (questions[gameRound - 1].type == "multiple") {
             order = Math.floor(1 + Math.random() * 4);
         } else {
             order = Math.floor(1 + Math.random() * 2);
@@ -95,23 +97,23 @@ function GameLoop() {
         var incorrectAns3Order = 3;
     }
 
-    document.getElementById("answerBtn" + order).innerHTML = unescape(questions[round - 1].correct_answer);
-    document.getElementById("answerBtn" + incorrectAns1Order).innerHTML = unescape(questions[round - 1].incorrect_answers[0]);
-    document.getElementById("answerBtn" + incorrectAns2Order).innerHTML = unescape(questions[round - 1].incorrect_answers[1]);
-    document.getElementById("answerBtn" + incorrectAns3Order).innerHTML = unescape(questions[round - 1].incorrect_answers[2]);
+    document.getElementById("answerBtn" + order).innerHTML = unescape(questions[gameRound - 1].correct_answer);
+    document.getElementById("answerBtn" + incorrectAns1Order).innerHTML = unescape(questions[gameRound - 1].incorrect_answers[0]);
+    document.getElementById("answerBtn" + incorrectAns2Order).innerHTML = unescape(questions[gameRound - 1].incorrect_answers[1]);
+    document.getElementById("answerBtn" + incorrectAns3Order).innerHTML = unescape(questions[gameRound - 1].incorrect_answers[2]);
 
     //Hvis spørgsmålet er en boolean, altså et true eller false spørgsmål, skal de valgmulighed 3 og 4 ikke vises, da de ikke findes
-    if (questions[round - 1].type == "boolean") {
+    if (questions[gameRound - 1].type == "boolean") {
         document.getElementById('answerBtn3').hidden = true;
         document.getElementById('answerBtn4').hidden = true;
     }
 
-    if (round > amountOfQuestions - 1) {
+    if (gameRound > amountOfQuestions - 1) {
         state = "end";
     }
 }
 
-//Viser og skjuler de forskellige elementer på slutskærmen
+// Viser og skjuler de forskellige elementer på slutskærmen
 function EndLoop() {
     document.getElementById('end').hidden = false;
     document.getElementById('tryAgain').hidden = false;
@@ -123,14 +125,17 @@ function EndLoop() {
 
 function Answer(theAnswer) {
     if (theAnswer == order) {
+        // CORRECT ANSWER
         correctAnswers++;
         print("Correct!");
     } else {
-        print("Incorrect! The correct answer was: " + unescape(questions[round - 1].correct_answer));
+        // WRONG ANSWER
+        print("Incorrect! The correct answer was: " + unescape(questions[gameRound - 1].correct_answer));
+        setHue(10);
     }
-    print(questions[round - 1]);
+    print(questions[gameRound - 1]);
 
-    round++;
+    gameRound++;
     orderDecited = false;
 }
 
