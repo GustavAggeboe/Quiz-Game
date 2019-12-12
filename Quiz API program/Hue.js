@@ -5,9 +5,10 @@ const bridgeIP = "192.168.0.102";
 let urlLights = "";
 let whichLight = 19;
 
-urlLights = "http://" + bridgeIP + '/api/' + username + '/lights/' + whichLight + '/state/';
+urlLights = "http://" + bridgeIP + '/api/' + username + '/lights/';
 
 function setLight(data){
+    let path = urlLights + whichLight + "/state/";
     const content = JSON.stringify(data);
     httpDo(path, 'PUT', content, 'text');  // Lav til request
 
