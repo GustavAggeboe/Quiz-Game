@@ -12,6 +12,10 @@ function setLight(data){
     const content = JSON.stringify(data);
     httpDo(path, 'PUT', content, 'text');  // Lav til request
 
+    // Dbug
+    print("Set the light");
+    print(data);
+
 }
 
 function setHue(value){
@@ -19,7 +23,7 @@ function setHue(value){
     const hue = {
         hue: value, 
         on: true,
-        transitiontime: .25,
+        transitiontime: 1,
     }
 
     setLight(hue);
