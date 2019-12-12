@@ -6,16 +6,23 @@ var correctAnswers = 0;
 var questions;
 var amountOfQuestions = 10;
 
+let cnv;
+
 var canShowQuestions = false;
 
 function setup() {
-    createCanvas(w, h);
+    cnv = createCanvas(w, h);
+
+    cnv.parent(document.getElementById('container'));
 }
 
 function BeginGame() {
     state = "game";
     // Gør pæren blå
+    setSat(254);
+    setBri(150);
     setHue(43690);
+    //43690
 }
 
 function draw() {
@@ -69,7 +76,6 @@ function GameLoop() {
     document.getElementById('answerBtn3').hidden = false;
     document.getElementById('answerBtn4').hidden = false;
 
-    textAlign(LEFT);
     if (!orderDecited) {
         if (questions[gameRound - 1].type == "multiple") {
             order = Math.floor(1 + Math.random() * 4);
@@ -127,15 +133,30 @@ function Answer(theAnswer) {
     if (theAnswer == order) {
         // CORRECT ANSWER
         correctAnswers++;
-        print("Correct!");
+        //print("Correct!");
+        setHue(21845);
     } else {
         // WRONG ANSWER
-        print("Incorrect! The correct answer was: " + unescape(questions[gameRound - 1].correct_answer));
-        setHue(10);
+        //print("Incorrect! The correct answer was: " + unescape(questions[gameRound - 1].correct_answer));
+        setHue(0);
+        document.getElementById("answerBtn" + theAnswer).style.background = "red";
     }
-    print(questions[gameRound - 1]);
+    //print(questions[gameRound - 1]);
 
+    // Display the correct answers
+    //document.getElementById("answerBtn" + order).style.color = "green";
+    document.getElementById("answerBtn" + order).style.background = "green";
+
+    // Vent lidt før næste runde, så man kan se om man har svaret korrekt
+    setTimeout(NextQuestion, 1000);
+}
+
+function NextQuestion () {
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById("answerBtn" + i).style.background = "none";
+    }
     gameRound++;
+    setHue(43690);
     orderDecited = false;
 }
 

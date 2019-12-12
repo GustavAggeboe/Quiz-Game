@@ -10,12 +10,12 @@ urlLights = "http://" + bridgeIP + '/api/' + username + '/lights/';
 function setLight(data){
     let path = urlLights + whichLight + "/state/";
     const content = JSON.stringify(data);
-    httpDo(path, 'PUT', content, 'text');  // Lav til request
+    httpDo(path, 'PUT', content, 'text', lightResponse);  // Request
 
-    // Dbug
-    print("Set the light");
-    print(data);
+}
 
+function lightResponse (data) {
+    //print(data);
 }
 
 function setHue(value){
@@ -40,13 +40,13 @@ function setBri(value){
     setLight(bri);
 }
 
-function setCt(value){
+function setSat(value){
     
-    const ct = {
-        ct: value, 
+    const sat = {
+        sat: value, 
         on: true,
         transitiontime: 0,
     }
 
-    setLight(ct);
+    setLight(sat);
 }
