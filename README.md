@@ -1,5 +1,32 @@
-# Quiz-game
+# Quiz Game
 
-Dette er et quiz spil baseret på et quiz API som er fundet på nettet. Spillet fungerer på den måde at man får 10 spørgsmål, én af gangen, som man skal svare på. Når man svarer på et spørgsmål vil vores HUE lampe lyse enten grønt eller rødt alt efter om man svarede rigtigt eller forkert. Desuden lyser lampen også blåt når man er i gang med at svare på et spørgsmål. Til sidst når man så har svaret på alle spørgsmålene, kommer der en slutskærm som fortæller en hvor mange rigtige svar man fik. Desuden får man muligheden for at spille igen.
+> **Note:** This project serves as **documentation** of our **learning journey** and is not intended for ongoing use or maintenance.
+> The repository is kept public to be viewed as part of our portfolios.
 
-Det quiz API der bruges har noget der hedder en token. Denne token gør at man ikke kan få samme spørgsmål 2 gange i en "runde". Denne feature er inkluderet i spillet så det ikke sker. Desuden skal denne token nulstilles når spillet er ovre, så når man starter et nyt spil kan man godt få de spørgsmål man fik i sidste spil, bare ikke det samme to gange i træk. Det andet API der bruges er selvfølgelig Phillips HUE's API. Det er nogle simple if statements der siger at hvis man svarer rigtigt på spørgsmålet skal HUE lampen blive grøn og hvis man så ikke svarer rigtigt skal den blive rød. Disse if statements kører så en funktion som faktisk sætter lamperne til de rigtige farver.
+<br>
+
+This project contains a quiz game developed using a public quiz API and Philips Hue's API. The game offers an interactive quiz experience where users answer 10 questions sequentially. The purpose of this project is to demonstrate API integration with interactive hardware.
+
+## Overview
+
+- **Quiz Mechanics:**  
+  The game presents 10 questions one at a time. After each answer is submitted, a Philips Hue lamp provides immediate visual feedback—lighting green for a correct response or red for an incorrect one. While a question is active, the lamp displays blue, indicating that the answer is being processed.
+
+- **Scoring & Replay:**  
+  Upon completion of all questions, a final screen displays the total number of correct answers. Users are then given the option to play again.
+
+## Technical Details
+
+- **Quiz API Integration:**  
+  The quiz questions are sourced from [Open Trivia Database](https://opentdb.com/). The API uses a token mechanism to ensure that the same question is not repeated within a single round. This token is automatically reset after each game, allowing previously seen questions to reappear in subsequent rounds.
+
+- **Philips Hue API Integration:**  
+  The game leverages the Philips Hue API to control a Hue lamp. Conditional statements change the lamp's color based on the user's response:
+  - **Green:** When the user answers correctly.
+  - **Red:** When the user answers incorrectly.
+  - **Blue:** While the user is actively answering a question.
+
+## Reference
+
+- **Quiz API:**  
+  [Open Trivia Database (opentdb.com)](https://opentdb.com/)
